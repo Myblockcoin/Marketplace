@@ -44,6 +44,7 @@ const NFTPlace: NextPage<NFTPlaceProps> = ({
               <div className="max-w-[300px] mx-auto">
                 <div className="rounded overflow-hidden ">
                   <Image
+                    alt="coin image"
                     src={coinImage}
                     className="w-full rounded-lg"
                   />
