@@ -17,6 +17,7 @@
     "wagmi": "0.6.1"
   },
   "devDependencies": {
+    "@netlify/plugin-nextjs": "^4.28.4",
     "@svgr/webpack": "^6.5.1",
     "@types/node": "18.11.9",
     "@types/react": "18.0.25",
