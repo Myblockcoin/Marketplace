@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import logo from "../assets/svg/logo.svg";
+import logo from "../assets/logo-full.png";
 import Cup from "../assets/svg/cup.svg";
 import Market from "../assets/svg/market.svg";
 import Wallet from "../assets/svg/wallet.svg";

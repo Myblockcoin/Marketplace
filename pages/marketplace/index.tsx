@@ -53,7 +53,7 @@ const MarketPlace: NextPage<MarketPlaceProps> = ({
           Current listings
         </h1>
         <h2 className="text-white pt-5">
-          Buy and Sell Ghost Trader NFTs using the GTR NFT Marketplace.
+          Buy and Sell Blockcoin NFTs using the GTR NFT Marketplace.
         </h2>
         <div className="my-4 overflow-x-auto sm:-mx-6 lg:-mx-8 text-white hidden md:block">
           <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">

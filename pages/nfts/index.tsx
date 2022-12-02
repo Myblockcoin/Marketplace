@@ -11,7 +11,7 @@ const NFTPlace: NextPage<NFTPlaceProps> = ({ walletConnected }) => {
     <div className="sm:flex flex-col w-100 flex-1 px-6 lg:px-8 overflow-y-auto py-4 bg-secondary hidden">
       <main className="flex flex-col w-100 flex-1 relative focus:outline-none">
         <h1 className="text-[#F4CA64]  text-left text-3xl font-bold">
-          Ghost Trader Membership Card #93
+          Blockcoin Medallion #93
         </h1>
         {!walletConnected && (
           <div className="mt-4">
