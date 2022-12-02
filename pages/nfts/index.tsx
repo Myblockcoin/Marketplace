@@ -1,5 +1,7 @@
 import type { NextPage } from "next";
 import React, { useEffect } from "react";
+import coinImage from "@/assets/coin-nft.png"
+import Image from "next/image";
 
 interface NFTPlaceProps {
   walletConnected: boolean;
@@ -41,12 +43,10 @@ const NFTPlace: NextPage<NFTPlaceProps> = ({
             <div className="p-6 overflow-hidden card relative bg-dark2-500 shadow rounded-lg text-left flex flex-col text-gray-300 bg-dark2-500">
               <div className="max-w-[300px] mx-auto">
                 <div className="rounded overflow-hidden ">
-                  <video
-                    src="https://gtr.azureedge.net/nft/0x617d66d001dafb8a4601b62d9f91c9c915ac6861/93.mp4"
+                  <Image
+                    src={coinImage}
                     className="w-full rounded-lg"
-                    autoPlay={true}
-                    loop={true}
-                  ></video>
+                  />
                 </div>
               </div>
             </div>{" "}
