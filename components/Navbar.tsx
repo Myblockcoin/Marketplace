@@ -1,18 +1,33 @@
 import Link from "next/link";
 import Image from "next/image";
 import logo from "../assets/svg/logo.svg";
-import Cup from "../assets/svg/cup.svg";
-import Market from "../assets/svg/market.svg";
-import Wallet from "../assets/svg/wallet.svg";
 
-export default function Navbar() {
+interface NavbarProps {
+  hamburgerOpen: boolean;
+}
+
+export default function Navbar({ hamburgerOpen }: NavbarProps) {
   return (
-    <div className="h-full side-nav md:flex md:flex-shrink-0 border-right-linear-gradient bg-dark2-500 px-4 overflow-y-auto flex-1 sm:flex-initial overflow-y-auto ">
-      <div className="flex flex-col w-56">
-        <div className="flex flex-col h-0 flex-1">
-          <div className="h-35 px-4 bg-primary p-8 border-b border-gray-600 border-opacity-25">
-            <Image src={logo} alt="logo" />
-          </div>
+    <div
+      className={
+        !hamburgerOpen
+          ? "h-full side-nav md:flex md:flex-shrink-0 border-right-linear-gradient bg-dark2-500 px-4 overflow-y-auto flex-1 sm:flex-initial overflow-y-auto"
+          : "h-full side-nav md:flex md:flex-shrink-0 border-right-linear-gradient bg-dark2-500 px-4 overflow-y-auto flex-1 sm:flex-initial overflow-y-auto pt-20 hidden"
+      }
+    >
+      <div
+        className={!hamburgerOpen ? "flex flex-col w-56" : "flex flex-col w-17"}
+      >
+        <div
+          className={
+            !hamburgerOpen ? "flex flex-col h-0 flex-1" : "flex flex-col h-0"
+          }
+        >
+          {!hamburgerOpen && (
+            <div className="h-35 px-4 bg-primary p-8 border-b border-gray-600 border-opacity-25">
+              <Image src={logo} alt="logo" />
+            </div>
+          )}
           <div className="flex-1 flex flex-col pb-8">
             <nav className="flex-1 px-2 py-4 bg-primary space-y-5 pl-3">
               <Link
@@ -20,20 +35,53 @@ export default function Navbar() {
                 href="/"
               >
                 <div className="rounded-full bg-button flex items-center justify-center">
-                  <Image className="w-5 h-5" src={Wallet} alt="Wallet" />
+                  <svg
+                    width="1200pt"
+                    height="1200pt"
+                    viewBox="0 0 1200 1200"
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="fill-white h-6 w-6 justify-centermr-6"
+                  >
+                    <g>
+                      <path d="m950 700c0 27.613-22.387 50-50 50s-50-22.387-50-50 22.387-50 50-50 50 22.387 50 50z"></path>
+                      <path
+                        d="m150 0c-82.844 0-150 67.156-150 150v900c0 82.844 67.156 150 150 150h900c82.844 0 150-67.156 150-150v-700c0-82.844-67.156-150-150-150h-150v-50c0-82.844-67.156-150-150-150zm650 200v-50c0-27.613-22.387-50-50-50h-600c-27.613 0-50 22.387-50 50v50zm-700 100v750c0 27.613 22.387 50 50 50h900c27.613 0 50-22.387 50-50v-150h-200c-110.45 0-200-89.547-200-200s89.547-200 200-200h200v-150c0-27.613-22.387-50-50-50zm1e3 300h-200c-55.23 0-100 44.77-100 100s44.77 100 100 100h200z"
+                        fill-rule="evenodd"
+                      ></path>
+                    </g>
+                  </svg>
                 </div>
-                <div className="ml-4 font-semibold">Portfolio</div>
-                <div className="ml-auto pr-3">❯</div>
+                {!hamburgerOpen && (
+                  <div className="flex w-full space-between">
+                    <div className="ml-4 font-semibold">Portfolio</div>
+                    <div className="ml-auto pr-3">❯</div>
+                  </div>
+                )}
               </Link>
               <Link
                 className="border-solid border-2 p-4 my-3 flex items-center rounded-md p-4 text-gray-200 focus:border-[#F4CA64] focus:text-[#F4CA64]"
                 href="/nfts"
               >
                 <div className="rounded-full bg-button flex items-center justify-center">
-                  <Image className="w-5 h-5" src={Cup} alt="Cup" />
+                  <svg
+                    width="1200pt"
+                    height="1200pt"
+                    viewBox="0 0 1200 1200"
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="fill-white h-6 w-6 justify-centermr-6"
+                  >
+                    <path
+                      d="m250 345v5c0 176.36 130.45 322.27 300.12 346.48-0.082032 1.1641-0.12109 2.3398-0.12109 3.5234v150h-50c-138.07 0-250 111.93-250 250v50c0 27.613 22.387 50 50 50h600c27.613 0 50-22.387 50-50v-50c0-138.07-111.93-250-250-250h-50v-150c0-1.1836-0.039062-2.3594-0.12109-3.5234 169.67-24.211 300.12-170.11 300.12-346.48v-5c114.11-23.164 200-124.05 200-245v-50c0-27.613-22.387-50-50-50h-1e3c-27.613 0-50 22.387-50 50v50c0 120.95 85.887 221.84 200 245zm100-245v250c0 138.07 111.93 250 250 250s250-111.93 250-250v-250zm-100 141.46v-141.46h-100c0 65.312 41.742 120.87 100 141.46zm700 0v-141.46h100c0 65.312-41.738 120.87-100 141.46zm-450 708.54c-82.844 0-150 67.156-150 150h500c0-82.844-67.156-150-150-150z"
+                      fill-rule="evenodd"
+                    ></path>
+                  </svg>
                 </div>
-                <div className="ml-4 font-semibold">NFTs</div>
-                <div className="ml-auto pr-3">❯</div>
+                {!hamburgerOpen && (
+                  <div className="flex w-full space-between">
+                    <div className="ml-4 font-semibold">NFTs</div>
+                    <div className="ml-auto pr-3">❯</div>
+                  </div>
+                )}
               </Link>
               <Link
                 className="border-solid border-2 p-4 my-3 flex items-center rounded-md p-4 text-gray-200 focus:border-[#F4CA64] focus:text-[#F4CA64]"
@@ -54,8 +102,12 @@ export default function Navbar() {
                     </g>
                   </svg>
                 </div>
-                <div className="ml-4 font-semibold">Marketplace</div>
-                <div className="ml-auto pr-3">❯</div>
+                {!hamburgerOpen && (
+                  <div className="flex w-full space-between">
+                    <div className="ml-4 font-semibold">MarketPlace</div>
+                    <div className="ml-auto pr-3">❯</div>
+                  </div>
+                )}
               </Link>
             </nav>
           </div>

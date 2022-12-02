@@ -1,4 +1,3 @@
-import "../styles/globals.css";
 import "@rainbow-me/rainbowkit/styles.css";
 import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { chain, configureChains, createClient, WagmiConfig } from "wagmi";
@@ -8,6 +7,7 @@ import type { AppProps } from "next/app";
 import Layout from "@/components/Layout";
 import { useState } from "react";
 import "./app.css";
+import "../styles/globals.css";
 
 const { chains, provider } = configureChains(
   [chain.goerli],
@@ -73,16 +73,23 @@ function MyApp({ Component, pageProps }: AppProps) {
   ]);
   const [walletConnected, setWalletConnected] = useState(false);
   const [address, setAddress] = useState("");
+  const [hamburgerOpen, setHamburgerOpen] = useState(false);
   return (
     <WagmiConfig client={wagmiClient}>
       <RainbowKitProvider chains={chains}>
-        <Layout setWalletConnect={setWalletConnected} setAddress={setAddress}>
+        <Layout
+          setWalletConnect={setWalletConnected}
+          setAddress={setAddress}
+          hamburgerOpen={hamburgerOpen}
+          setHamburgerOpen={setHamburgerOpen}
+        >
           <Component
             {...pageProps}
             walletConnected={walletConnected}
             itemList={itemList}
             address={address}
             provider={provider}
+            hamburgerOpen={hamburgerOpen}
           />
         </Layout>
       </RainbowKitProvider>
