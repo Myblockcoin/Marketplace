@@ -9,17 +9,17 @@ interface MarketPlaceProps {
   itemList: itemState[];
   walletConnected: boolean;
   address: string;
-  provider: any;
+  hamburgerOpen: boolean;
 }
 
 const MarketPlace: NextPage<MarketPlaceProps> = ({
   itemList,
   walletConnected,
   address,
-  provider,
+  hamburgerOpen,
 }) => {
   const clim = async () => {
-    const web3Provider = new providers.Web3Provider(provider);
+    const web3Provider = new providers.Web3Provider(window.ethereum as any);
     const signer = web3Provider.getSigner();
     const contract = new ethers.Contract(
       SMARTCONTACT_ADDRESS,
@@ -30,24 +30,31 @@ const MarketPlace: NextPage<MarketPlaceProps> = ({
     try {
       await contract.claim(
         address,
-        1,
+        2,
         1,
         "0x4912A32e4532Ea58c54c5A00b174756Df0B9E971",
-        1000000,
+        10000000,
         [
-          "0x0000000000000000000000000000000000000000000000000000000000000000",
+          0x0000000000000000000000000000000000000000000000000000000000000000,
           115792089237316195423570985008687907853269984665640564039457584007913129639935,
           10000000,
           "0x07865c6E87B9F70255377e024ace6630C1Eaa37F",
         ],
-        0x00
+        0x00,
+        { value: 0 }
       );
     } catch (error) {
       console.log(error);
     }
   };
   return (
-    <div className="sm:flex flex-col w-100 flex-1 px-6 lg:px-8 overflow-y-auto py-4 bg-secondary hidden">
+    <div
+      className={
+        hamburgerOpen
+          ? "sm:flex flex-col w-100 flex-1 px-6 lg:px-8 overflow-y-auto py-4 bg-secondary flex"
+          : "sm:flex flex-col w-100 flex-1 px-6 lg:px-8 overflow-y-auto py-4 bg-secondary hidden"
+      }
+    >
       <main className="flex flex-col w-100 flex-1 relative focus:outline-none">
         <h1 className="text-[#F4CA64]  text-left text-3xl font-bold">
           Current listings
@@ -193,6 +200,87 @@ const MarketPlace: NextPage<MarketPlaceProps> = ({
               </table>
             </div>
           </div>
+        </div>
+        <div className="w-full grid gap-4 grid-cols-2 mt-6 mb-3 block md:hidden">
+          <div className="border-[#161717] bg-[#161717] text-white border rounded-lg">
+            <div
+              className="h-48 w-full bg-cover bg-no-repeat bg-center rounded-lg"
+              style={{
+                backgroundImage:
+                  'url("https://gtr.azureedge.net/nft/0xfe5976756a2b9990f5a831763b7634861bc83fd4/1.png")',
+              }}
+            ></div>
+            <div className="px-4 pt-2 text-md font-bold text-center">
+              SILVER #
+            </div>
+            <div className="px-4 text-sm text-center">
+              <span className="text-xs text-gray-500">REWARD SHARE</span>
+              <br />
+              50%
+            </div>
+            <div className="px-4 text-sm text-center">
+              <span className="text-xs text-gray-500">ACTIVE BALANCE</span>
+              <br />
+              1,223.10
+            </div>
+            <div className="px-4 pb-2 text-sm text-center">
+              <span className="text-xs text-gray-500">LISTING PRICE</span>
+              <br />
+              $1,359.00
+            </div>
+            <div className="whitespace-nowrap text-sm">
+              {walletConnected ? (
+                <button
+                  className="w-full flex-none h-11 inline-block bg-[#F4CA64] py-2 px-4 border border-transparent rounded-md text-base font-medium text-dark1-500 hover:bg-[#161717] hover:text-[#F4CA64] hover:border hover:border-[#F4CA64] disabled:bg-[#161717] disabled:text-gray-500 disabled:border disabled:border-gray-500"
+                  onClick={clim}
+                >
+                  Mint NFT
+                </button>
+              ) : (
+                <button
+                  className="w-full flex-none h-11 inline-block bg-[#F4CA64] py-2 px-4 border border-transparent rounded-md text-base font-medium text-dark1-500 hover:bg-[#161717] hover:text-[#F4CA64] hover:border hover:border-[#F4CA64] disabled:bg-[#161717] disabled:text-gray-500 disabled:border disabled:border-gray-500"
+                  disabled={true}
+                >
+                  CONNECT WALLET
+                </button>
+              )}
+            </div>
+          </div>
+          {itemList.map((item, _index) => {
+            return (
+              <div className="border-[#161717] bg-[#161717] text-white border rounded-lg">
+                <div
+                  className="h-48 w-full bg-cover bg-no-repeat bg-center rounded-lg"
+                  style={{
+                    backgroundImage: `url(${item.image});`,
+                  }}
+                ></div>
+                <div className="px-4 pt-2 text-md font-bold text-center">
+                  ${item.tier + " #" + item.tokenId}
+                </div>
+                <div className="px-4 text-sm text-center">
+                  <span className="text-xs text-gray-500">REWARD SHARE</span>
+                  <br />${item.reward}%
+                </div>
+                <div className="px-4 text-sm text-center">
+                  <span className="text-xs text-gray-500">ACTIVE BALANCE</span>
+                  <br />${item.totalbalance}
+                </div>
+                <div className="px-4 pb-2 text-sm text-center">
+                  <span className="text-xs text-gray-500">LISTING PRICE</span>
+                  <br />${item.listedPrice}
+                </div>
+                <div className="whitespace-nowrap text-sm">
+                  <Link
+                    className="inline-block text-center w-full bg-primary-500 py-2 px-4 border border-transparent rounded-md text-base font-medium text-dark1-500 hover:bg-[#161717] hover:text-primary-500 hover:border hover:border-primary-500"
+                    href="/nfts"
+                  >
+                    DETAIL
+                  </Link>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </main>
     </div>
